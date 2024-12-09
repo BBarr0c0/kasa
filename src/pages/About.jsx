@@ -7,8 +7,6 @@ const About = () => {
     return (
         <div className="about">
              <Banner image={bannerAbout} />
-            <h1>À Propos</h1>
-            <p>Présentation de Kasa et de ses valeurs.</p>
         </div>
     );
 };

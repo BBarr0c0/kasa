@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import '../styles/pages/home.scss';
 import Banner from '../components/Banner';
 import bannerHome from '../assets/banner_home.png';
+import Card from '../components/Card';
 
 const Home = () => {
-    const [properties, setProperties] = useState([]); // État pour stocker les données
+    const [data, setData] = useState([]);
 
     useEffect(() => {
-        // Charger les données de data.json
         fetch('/data.json')
             .then((response) => {
                 if (!response.ok) {
@@ -17,7 +17,7 @@ const Home = () => {
                 return response.json();
             })
             .then((data) => {
-                setProperties(data); // Met à jour l'état avec les données
+                setData(data);
             })
             .catch((error) => {
                 console.error('Erreur:', error);
@@ -27,14 +27,10 @@ const Home = () => {
     return (
         <div className="home">
             <Banner image={bannerHome} text="Chez vous, partout et ailleurs" />
-            <h1>Propriétés disponibles</h1>
             <div className="properties-grid">
-                {properties.map((property) => (
+                {data.map((property) => (
                     <Link to={`/property/${property.id}`} key={property.id}>
-                        <div className="property-card">
-                            <img src={property.cover} alt={property.title} className="property-image" />
-                            <div className="property-title">{property.title}</div>
-                        </div>
+                        <Card key={property.id} title={property.title} cover={property.cover} />
                     </Link>
                 ))}
             </div>

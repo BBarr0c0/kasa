@@ -8,7 +8,6 @@ const Property = () => {
     const navigate = useNavigate(); // Pour rediriger en cas d'erreur (par exemple, propriété introuvable)
 
     useEffect(() => {
-        // Charger les données depuis data.json
         fetch('/data.json')
             .then((response) => response.json())
             .then((data) => {
